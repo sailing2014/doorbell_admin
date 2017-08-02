@@ -1,0 +1,22 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+/*注销*/
+.logout a {
+  float: right;
+  margin-right:40px;
+  text-decoration: none;
+  color: #00B7FF;
+}
+.logout a:hover{text-decoration: underline;}
+
+
+/*列表*/
+.cfCon{ background:#fff; padding:15px; border-bottom:1px solid #d4d4d4;}
+.cfbox{}
+.cfTable{ border:1px solid #e5e5e5; }
+.cfTable tr th{ background:#eee; height:50px;  text-align:center; color:#333; border-right:1px solid #fff; font-weight:normal; }
+.cfTable tr td{background:#fff;height:50px; text-align:center;border-right:1px solid #fff; color:#333; }
+.cfTable a{color: #333; }

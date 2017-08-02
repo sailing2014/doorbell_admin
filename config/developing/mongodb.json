@@ -1,0 +1,9 @@
+{
+    "db":{
+        "host1":"127.0.0.1",
+        "port":"27017",
+        "user":"doorbell_admin",
+        "pass":"x",
+        "dbName":"x"
+    }
+}

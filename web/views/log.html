@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>cid查询日志</title>
+  <link rel='stylesheet' href='../../public/stylesheets/style.css' />
+</head>
+<body>
+
+<div id="intro">
+  <div>cid: <input id='btn_cid' value="<%= cid %>"></div>
+  <input id='inp_env' value="<%= env %>" type="hidden">
+  <hr>
+  <div><button id='btn_submit_wakeup'>app唤醒</button></div>
+  <div><button id='btn_submit_doorbell'>app门铃推送</button></div>
+  <div><button id='btn_submit_s_wakeup'>server唤醒</button></div>
+  <div><button id='btn_submit_s_heartbeat'>server心跳</button></div>
+  <div><button id='btn_submit_s_connect'>设备连接server</button></div>
+
+  <hr>
+  <div class="cfCon">
+    <div class="cfbox">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cfTable">
+        <tbody id="log_list">
+        <% if ((data.data) && (data.data.logs) && (data.data.logs.length) ){ %>
+        <tr><th>id</th><th>text</th><th>time</th></tr>
+        <% for(var i=0; i< data.data.logs.length; i++){ %>
+          <% if(i % 2 ==0){ %>
+            <tr><td><%= i%></td><td><%=data.data.logs[i].text%></td><td><%= data.data.logs[i].time %></td></tr>
+          <% }else{ %>
+            <tr><th><%= i%></th><th><%= data.data.logs[i].text%></th><th><%= data.data.logs[i].time %></th></tr>
+          <% } %>
+
+        <% } %>
+        <%}else { %>
+        <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script src="../../public/javascripts/jquery.min.js"></script>
+<script type="text/javascript">
+  var env = $('#inp_env').val();
+  console.log(env);
+
+  $('#btn_submit_wakeup').click(function(){
+    var cid = trim($('#btn_cid').val());
+    if( !cid){
+      alert("亲亲,填写一下cid哦^_^");
+    }else{
+      var get_url =  "/logs/1/" + cid+"?env=" + env;
+      $.ajax({
+        type: "GET",
+        url: get_url,
+        success: function (json) {
+          // 模拟result 有数据和无数据的结果
+          var showcontent = "";
+          if (json.data.logs && json.data.logs.length) {           // 判断是否为空
+             showcontent = "<tr><th>id</th><th>text</th>"+
+                    "<th>time</th></tr>";
+
+            var list = json.data.logs;
+            for (var i = 0; i < list.length; i++) {
+              if( i % 2 == 0){
+                showcontent +=  '<tr>'+
+                        '<td>'+ i   + '</td>'  +
+                        '<td>'+ list[i].text   + '</td>' +
+                        '<td>' + list[i].time  + '</td>' +
+                        '</tr>' ;
+              }else{
+                showcontent +=  '<tr>'+
+                        '<th>'+ i   + '</th>'  +
+                        '<th>'+ list[i].text   + '</th>' +
+                        '<th>' + list[i].time +'</th>' +
+                        '</tr>' ;
+              }
+            }
+          }else{
+            showcontent = "没唤醒数据,不要拉了..";
+          }
+
+          $("#log_list").html(showcontent);
+        }
+      });
+    }
+  });
+  $('#btn_submit_doorbell').click(function(){
+    var cid = trim($('#btn_cid').val());
+    if( !cid){
+      alert("亲亲,填写一下cid哦^_^");
+    }else{
+      var get_url =  "/logs/2/" + cid+"?env=" + env;
+      $.ajax({
+        type: "GET",
+        url: get_url,
+        success: function (json) {
+          // 模拟result 有数据和无数据的结果
+          var showcontent = "";
+          if (json.data.logs && json.data.logs.length) {           // 判断是否为空
+            showcontent = "<tr><th>id</th><th>text</th>"+
+                    "<th>time</th></tr>";
+
+            var list = json.data.logs;
+            for (var i = 0; i < list.length; i++) {
+              if( i % 2 == 0){
+                showcontent +=  '<tr>'+
+                        '<td>'+ i   + '</td>'  +
+                        '<td>'+ list[i].text   + '</td>' +
+                        '<td>' + list[i].time  + '</td>' +
+                        '</tr>' ;
+              }else{
+                showcontent +=  '<tr>'+
+                        '<th>'+ i   + '</th>'  +
+                        '<th>'+ list[i].text   + '</th>' +
+                        '<th>' + list[i].time +'</th>' +
+                        '</tr>' ;
+              }
+            }
+          }else{
+            showcontent = "没门铃日志数据,不要拉了..";
+          }
+
+          $("#log_list").html(showcontent);
+        }
+      });
+    }
+  });
+
+  $('#btn_submit_s_wakeup').click(function(){
+    var cid = trim($('#btn_cid').val());
+    if( !cid){
+      alert("亲亲,填写一下cid哦^_^");
+    }else{
+      var get_url =  "/logs/3/" + cid + "?env=" + env;
+      $.ajax({
+        type: "GET",
+        url: get_url,
+        success: function (json) {
+          // 模拟result 有数据和无数据的结果
+          var showcontent = "";
+          if (json.data.logs && json.data.logs.length) {           // 判断是否为空
+            showcontent = "<tr><th>id</th><th>text</th>"+
+                    "<th>time</th></tr>";
+
+            var list = json.data.logs;
+            for (var i = 0; i < list.length; i++) {
+              if( i % 2 == 0){
+                showcontent +=  '<tr>'+
+                        '<td>'+ i   + '</td>'  +
+                        '<td>'+ list[i].text   + '</td>' +
+                        '<td>' + list[i].time  + '</td>' +
+                        '</tr>' ;
+              }else{
+                showcontent +=  '<tr>'+
+                        '<th>'+ i   + '</th>'  +
+                        '<th>'+ list[i].text   + '</th>' +
+                        '<th>' + list[i].time +'</th>' +
+                        '</tr>' ;
+              }
+            }
+          }else{
+            showcontent = "没有server唤醒日志数据,不要拉了..";
+          }
+
+          $("#log_list").html(showcontent);
+        }
+      });
+    }
+  });
+
+  $('#btn_submit_s_heartbeat').click(function(){
+    var cid = trim($('#btn_cid').val());
+    if( !cid){
+      alert("亲亲,填写一下cid哦^_^");
+    }else{
+      var get_url =  "/logs/4/" + cid +"?env=" + env;
+      $.ajax({
+        type: "GET",
+        url: get_url,
+        success: function (json) {
+          // 模拟result 有数据和无数据的结果
+          var showcontent = "";
+          if (json.data.logs && json.data.logs.length) {           // 判断是否为空
+            showcontent = "<tr><th>id</th><th>text</th>"+
+                    "<th>time</th></tr>";
+
+            var list = json.data.logs;
+            for (var i = 0; i < list.length; i++) {
+              if( i % 2 == 0){
+                showcontent +=  '<tr>'+
+                        '<td>'+ i   + '</td>'  +
+                        '<td>'+ list[i].text   + '</td>' +
+                        '<td>' + list[i].time  + '</td>' +
+                        '</tr>' ;
+              }else{
+                showcontent +=  '<tr>'+
+                        '<th>'+ i   + '</th>'  +
+                        '<th>'+ list[i].text   + '</th>' +
+                        '<th>' + list[i].time +'</th>' +
+                        '</tr>' ;
+              }
+            }
+          }else{
+            showcontent = "没设备心跳数据..";
+          }
+
+          $("#log_list").html(showcontent);
+        }
+      });
+    }
+  });
+
+  $('#btn_submit_s_connect').click(function(){
+    var cid = trim($('#btn_cid').val());
+    if( !cid){
+      alert("亲亲,填写一下cid哦^_^");
+    }else{
+      var get_url =  "/logs/5/" + cid +"?env=" + env;
+      $.ajax({
+        type: "GET",
+        url: get_url,
+        success: function (json) {
+          // 模拟result 有数据和无数据的结果
+          var showcontent = "";
+          if (json.data.logs && json.data.logs.length) {           // 判断是否为空
+            showcontent = "<tr><th>id</th><th>text</th>"+
+                    "<th>time</th></tr>";
+
+            var list = json.data.logs;
+            for (var i = 0; i < list.length; i++) {
+              if( i % 2 == 0){
+                showcontent +=  '<tr>'+
+                        '<td>'+ i   + '</td>'  +
+                        '<td>'+ list[i].text   + '</td>' +
+                        '<td>' + list[i].time  + '</td>' +
+                        '</tr>' ;
+              }else{
+                showcontent +=  '<tr>'+
+                        '<th>'+ i   + '</th>'  +
+                        '<th>'+ list[i].text   + '</th>' +
+                        '<th>' + list[i].time +'</th>' +
+                        '</tr>' ;
+              }
+            }
+          }else{
+            showcontent = "没设备连接服务器日志数据..";
+          }
+
+          $("#log_list").html(showcontent);
+        }
+      });
+    }
+  });
+  function trim(str){ //删除左右两端的空格
+    return str.replace(/(^s*)|(s*$)/g, "");
+  }
+</script>
+</body>
+</html>

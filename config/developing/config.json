@@ -1,0 +1,35 @@
+{
+    "proName":"doorbell_admin",
+    "port":"60730",
+    "system":{
+            "dev": {
+                "api_key": "xd",
+                "api_secret": "xsd"
+            },
+            "staging": {
+                "api_key": "xd",
+                "api_secret": "x"
+            },
+            "pro1": {
+                "api_key": "x",
+                "api_secret": "x"
+            },
+            "pro2": {
+                "api_key": "x",
+                "api_secret": "x"
+            }
+    },
+    "sdcp": {
+        "dev":"https://dev.x.x.com/v1",
+        "staging":"https://test.x.x.com/v1",
+        "pro1":"https://sdcp.x.com/v1",
+        "pro2":"https://sdcp.x2.com/v1"
+    },
+    "doorbell": {
+        "dev":"https://dev-x.x.com",
+        "staging":"https://test-x.x.com",
+        "pro1":"https://x.x1.com",
+        "pro2":"https://x.x2.com"
+    },
+    "environment":"developing"
+}

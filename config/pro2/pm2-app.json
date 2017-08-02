@@ -1,0 +1,15 @@
+{
+    "apps": [{
+        "name"              : "doorbell_admin",
+        "script"            : "/home/doorbell_admin/www/htdocs/main.js",
+        "log_date_format"   : "YYYY-MM-DD HH:mm Z",
+        "out_file"          : "/home/doorbell_admin/log/doorbell_admin-out.log",
+        "error_file"        : "/home/doorbell_admin/log/doorbell_admin-err.log",
+        "min_uptime"        : "200s",               // 200 seconds, defaults to 1000
+        "max_restarts"      : 10,                   // defaults to 15
+        "cron_restart"      : "11 1 * * *",         // restart at 1:11 am every day
+        "watch"             : false,
+        "ignore_watch"      : ["[\\/\\\\]\\./", "node_modules"],    // unused
+        "merge_logs"        : false
+    }]
+}
